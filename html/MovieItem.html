@@ -1,0 +1,39 @@
+<section>
+	<div class="movies-list">
+		<div class="movie-view">
+			<div class="view-image">
+				<img class="view" src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{item.backdrop_path}}" />
+			</div>
+			<div>
+				<h3 class="movie-title">{{item.title}}</h3>
+				<div>Raiting: {{item.popularity}}</div>
+				<div>Release Date: </div>
+				<div>{{item.overview}}</div>
+			</div>
+		</div>
+
+
+		<div class="add-favorite">
+			<a (click)="done?navigate('favorites'):this.add()">{{done?"Favorites":"Add to Favorites"}}</a>
+		</div>
+	</div>
+
+	<div>
+		<span>Reccomendations:</span>
+		<div class="container-fluid">
+			<div class="row">
+				<div *ngFor="let item of recomMovies" (click)="navigate('/movie/' + item.id)" class="recommItem" >
+					<div>{{item.title.length > 20
+						? item.title.substring(0, 20) + ".."
+						: item.title}}</div>
+					<div class="movie-image">
+						<img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{item.backdrop_path}}"/>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+

@@ -1,0 +1,29 @@
+<!--https://developers.themoviedb.org/3/movies/get-popular-movies -->
+
+<section class="app">
+        <h3>Popular</h3>
+
+        <div class="movies-list">
+            <div class="movie-card">
+                    <div class="row movie-card-body" *ngFor="let m of movies">
+
+                        <div class="col-md-2  movie-image">
+                            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{m.poster_path}}" />
+                        </div>
+                        <div class="col-md-9 movie-text">
+                            <h4 class="movie-title">{{m.title}}</h4>
+
+                            <strong>Genre: <span *ngFor="let num of m.genre_ids" >{{getGenre(num)}}</span></strong>
+
+
+                            <div class="overview">{{m.overview.length > 135? m.overview.substring(0, 135) + '..': m.overview}}
+                            </div>
+                            <div>
+                                <span class="link-text left" (click)="navigate('/movie/' + m.id)">About</span>
+                                <span class="link-text right" (click)="done?navigate('favorites'):this.add()">{{done?"Favorites":"Add to Favorites"}}</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+</section>

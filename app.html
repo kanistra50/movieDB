@@ -1,0 +1,29 @@
+
+<section class="container-fluid">
+
+    <router-outlet>
+        <header class="intro">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-7">
+                            <a href="#"><i class="fa fa-home fa-2x fa-fw" aria-hidden="true"></i></a>    <!--General -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="header-font">Movie Collection</div>
+                        </div>
+                        <div class="nav-right col-md-2 col-sm-5">
+                            <i class="fa fa-search fa-2x  fa-fw" aria-hidden="true" (click)="navigate('search')"></i>
+                            <!--Search in global DB -->
+                            <i class="fa fa-user fa-2x fa-fw" aria-hidden="true" (click)="navigate('favorites')"></i>
+                                                                                                <!--My List -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </router-outlet>
+</section>
+
+
+ 
