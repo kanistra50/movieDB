@@ -5,7 +5,8 @@
     m.HttpService = ng.core.Class({
         constructor: [
             ng.http.Http,
-            HttpService]
+            HttpService
+        ]
     });
 
 
