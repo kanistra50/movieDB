@@ -4,11 +4,9 @@
 
 
     m.MovieItem = ng.core.Component({
-        //selector: 'm-item',
+
         templateUrl: 'html/MovieItem.html'
-        // host: {
-        //     class: 'm-item'
-        // }
+  
 
     })
         .Class({
@@ -25,8 +23,8 @@
 
         Object.assign(this, {
             http: http,
-            done: m.done,
-            add: m.add(id),
+            //done: m.done,
+            add: function (id) {m.add(id)},
             id: id,
             item: { id : 'id', title : 'title', popularity: 'popularity',  overview : 'overview',
                 backdrop_path : 'backdrop_path'}
@@ -65,7 +63,5 @@
     };
 
    
-    MovieItem.prototype.ngOnDestroy = function () {
-
-    };
+    MovieItem.prototype.ngOnDestroy = function () {};
 })(window.m || (window.m = {}));  
