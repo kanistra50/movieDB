@@ -14,7 +14,7 @@
 
 
 		<div class="add-favorite">
-			<a (click)="done?navigate('favorites'):this.add()">{{done?"Favorites":"Add to Favorites"}}</a>
+			<a (click)="done?navigate('favorites'):this.add(item.id)">{{done?"Favorites":"Add to Favorites"}}</a>
 		</div>
 	</div>
 
