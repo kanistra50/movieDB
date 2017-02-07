@@ -16,17 +16,15 @@
         });
 
 
-
     function MovieList(http) {
-
         Object.assign(this, {
             http: http,
-            done: m.done,
-            add: m.add(),
+            //done: m.done,
+            add: function (id) {m.add(id)},
             movies: [],
             genres: []
-        });
-    };
+        })
+    }
 
 
     MovieList.prototype.loadList = function () {
@@ -36,7 +34,7 @@
                 t.movies = list.results;
                 //console.log(t.movies);
             })
-            .catch(function (err) { console.log(err)})
+            .catch(function (err) { console.log(err)});
 
         this.http.getGenres()
             .then(function (list) {
