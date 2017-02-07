@@ -20,7 +20,7 @@
                             </div>
                             <div>
                                 <span class="link-text left" (click)="navigate('/movie/' + m.id)">About</span>
-                                <span class="link-text right" (click)="done?navigate('favorites'):this.add()">{{done?"Favorites":"Add to Favorites"}}</span>
+                                <span class="link-text right" (click)="done?navigate('favorites'):this.add(m.id)">{{done?"Favorites":"Add to Favorites"}}</span>
                             </div>
                         </div>
                     </div>
