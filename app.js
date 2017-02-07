@@ -21,16 +21,10 @@
     function App( router ) {
         m.AppComponent.router = router;
         Object.assign(this, router);
-    }
+    };
 
-
-    m.done = false;
-
-    m.add = function (id){
-        return function() {
-            console.log(id);
-            m.done = true;
-        }
+    m.add = function (id) {
+        m.Ls.addFav(id);
     };
 
     var AppModule = ng.core.NgModule({
@@ -40,7 +34,6 @@
             m.Search,
             m.Favorites,
             m.MovieItem
-
         ],
         entryComponents: [
         ],
@@ -55,7 +48,6 @@
             m.HttpService,
             { provide: ng.http.RequestOptions, useClass: m.RequestOptions }
         ],
-        //bootstrap: [App, LocalStorage, SessionStorage],
         bootstrap: [App]
     })
         .Class({
