@@ -1,6 +1,6 @@
 # Movie Collection     movieDB_v3.0
 
-[See demo](https://kanistra50.github.io/movieDB/)
+[](https://kanistra50.github.io/movieDB/)
 
 Задание:
 Одностраничное приложения для просмотра фильмов с помощью The Movie Database API.
