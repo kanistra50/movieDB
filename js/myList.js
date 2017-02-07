@@ -1,3 +1,6 @@
+/**
+ * Created by nickon on 30.01.2017.
+ */
 //https://developers.themoviedb.org/3/search/search-movies
 (function (m) {
     'use strict';
@@ -24,21 +27,37 @@
         Object.assign(this, {
             http: http,
             movies: m.movies,
+            //remove: function (id) {m.remove(id)}
             remove: function (id) {m.Ls.removeFav(id); console.log("Remove on the myListJS")}
- 
+            //done: m.done,
+            //add: function (id) {m.add(id)},
+            // id: id,
+            // item: { id : 'id', title : 'title', popularity: 'popularity',  overview : 'overview',
+            //     backdrop_path : 'backdrop_path'}
         });
+
+        // this.subOnIdChange = route.params.subscribe(function(p) {
+        //     t.id = parseInt(p.id);
+        //     t.loadItem(p.id);
+        // });
 
     }
 
+
+
      Favorites.prototype.loadList = function () {
-         var list = JSON.parse(localStorage.getItem('movieDB')) || {
+
+         var //t = this,
+             list = JSON.parse(localStorage.getItem('movieDB')) || {
                  favs: []
              },
              ls = list["favs"],
              movies = m.movies;
 
+            //console.log(ls);
 
             if (ls[0] != undefined) {
+                m.movies = [];
                 for (var i in ls) {
                     console.log(ls[i]);
 
@@ -52,7 +71,7 @@
 
             console.log(m.movies);
             return m.movies;
-  
+
     };
 
     Favorites.prototype.navigate = function (path) {
@@ -64,7 +83,8 @@
     };
 
 
-    Favorites.prototype.ngAfterViewInit = function () {};
+    // Favorites.prototype.ngAfterContentInit = function () {
+    // };
 
     Favorites.prototype.ngOnDestroy = function () {};
 
