@@ -4,9 +4,11 @@
 
 
     m.MovieItem = ng.core.Component({
-
+        //selector: 'm-item',
         templateUrl: 'html/MovieItem.html'
-  
+        // host: {
+        //     class: 'm-item'
+        // }
 
     })
         .Class({
