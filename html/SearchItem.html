@@ -4,12 +4,16 @@
 
     <div>
         <p>
-            <input ([ngModel])="m.key_word" type="text" placeholder="write something" />
-
+            <input [(ngModel)]="key_word" type="text" placeholder="write something" >
         </p>
 
         <p>
-            <button type="submit" (click)="startSearch()">Find</button>
+            For adult:
+            <input [(ngModel)]="include_adult" type="checkbox"/>
+        </p>
+
+        <p>
+            <button class="find" type="submit" (click)="startSearch()">Find</button>
         </p>
     </div>
 
@@ -24,19 +28,31 @@
                     <div class="col-md-9 movie-text">
                         <h4 class="movie-title">{{m.title}}</h4>
 
-                        <!--<strong>Genre: <span *ngFor="let num of m.genre_ids" >{{getGenre(num)}}</span></strong>-->
-
-
                         <div class="overview">{{m.overview.length > 135? m.overview.substring(0, 135) + '..': m.overview}}
                         </div>
                         <div>
                             <span class="link-text left" (click)="navigate('/movie/' + m.id)">About</span>
-                            <span class="link-text right" (click)="done?navigate('favorites'):this.add()">{{done?"Favorites":"Add to Favorites"}}</span>
+                            <span class="link-text right"
+                                  (click)="!ls.checkById(m.id) ? navigate('favorites') : ls.addFav(m.id)">
+                                    {{!ls.checkById(m.id)  ? "Favorites" : "Add to Favorites"}}
+                            </span>
                         </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="inner-footer">
+                        <nav aria-label="page_nav">
+                            <ul class="pagination">
+                                <li class="page-item"  *ngFor="let page of ar">
+                                    <a class="page-link" href="#">
+                                        {{ar.indexOf(page)+1}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
