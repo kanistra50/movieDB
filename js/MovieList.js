@@ -9,6 +9,7 @@
     })
         .Class({
             constructor: [
+                m.LsController,
                 m.HttpService,
                 MovieList
 
@@ -16,23 +17,46 @@
         });
 
 
-    function MovieList(http) {
+    function MovieList(ls, http) {
         Object.assign(this, {
+            ls: ls,
             http: http,
-            //done: m.done,
-            add: function (id) {m.add(id)},
             movies: [],
-            genres: []
+            genres: [],
+            ar: [],
+            page_id: 1,
+            active: ""
         })
     }
 
-
-    MovieList.prototype.loadList = function () {
+    MovieList.prototype.loadList = function (page_id) {
         var t = this;
         this.http.getMovies(1)
             .then(function (list) {
-                t.movies = list.results;
-                //console.log(t.movies);
+
+                var len = list.results.length,
+                    n;
+
+                if(len >4) {
+                    var nId=0,
+                        left = len%4;
+                    n = parseInt(len/4);
+
+                    for (var ind = 0; ind<n; ind++) {
+                        t.ar[ind]=list.results.slice(4*ind, 4*ind + 4);
+                    }
+
+                    if (left != 0 ) {
+                        el.movies[el.movies.length + 1] = list.results.slice(len - left, len );
+                    }
+
+                    if( page_id == nId ) {
+                        t.active = "active";
+                    }
+
+                    t.movies = t.ar[nId];
+
+                }
             })
             .catch(function (err) { console.log(err)});
 
@@ -70,7 +94,9 @@
     };
 
 
-    MovieList.prototype.ngAfterViewInit = function () {};
+    MovieList.prototype.ngAfterViewInit = function () {
+
+    };
 
     MovieList.prototype.ngOnDestroy = function () {};
 
