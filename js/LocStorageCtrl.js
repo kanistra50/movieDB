@@ -2,22 +2,29 @@
 
     'use strict';
 
+    m.LsController = ng.core.Class({
+        constructor: [
+            LsController
+        ]
+    });
+
     function LsController() {
         var t = this;
         t.name = 'movieDB';
 
         t._saveData = function(data) {
-            localStorage.setItem(t.name, JSON.stringify(data));
+            localStorage.movieDB = JSON.stringify(data);
         };
 
         t._getData = function() {
-            var data = JSON.parse(localStorage.getItem(t.name)) || {
-                    favs: []
-                };
-            console.log(data);
+
+            var data = JSON.parse(localStorage.getItem(t.name)) || [];
             return data;
         };
+    }
 
+    LsController.prototype.checkById = function(id) {
+        return this._getData().indexOf(id) == -1;
     };
 
     LsController.prototype.addFav = function(id) {
@@ -25,8 +32,8 @@
            var t = this,
                data = t._getData();
 
-           if (data.favs.indexOf(id) < 0) {
-               data.favs.push(id);
+           if (data.indexOf(id) < 0) {
+               data.push(id);
            }
 
            t._saveData(data);
@@ -35,22 +42,17 @@
     };
 
     LsController.prototype.getFav = function() {
-
-            var t = this,
-                data = t._getData();
-            console.log(data);
-
-
+        return this._getData();
     };
 
     LsController.prototype.removeFav = function(id) {
-        console.log("Remove on LocStore");
+
         var  t = this,
             data = t._getData(),
-            indexId = data.favs.indexOf(id);
+            indexId = data.indexOf(id);
 
         if (indexId >= 0) {
-            data.favs.splice(indexId, 1);
+            data.splice(indexId, 1);
         }
 
         t._saveData(data);
