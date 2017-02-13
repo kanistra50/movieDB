@@ -1,11 +1,11 @@
 <section>
 	<div class="movies-list">
 		<div class="movie-view">
+			<h3 class="movie-title">{{item.title}}</h3>
 			<div class="view-image">
 				<img class="view" src="https://image.tmdb.org/t/p/w300_and_h450_bestv2{{item.backdrop_path}}" />
 			</div>
 			<div>
-				<h3 class="movie-title">{{item.title}}</h3>
 				<div>Raiting: {{item.popularity}}</div>
 				<div>Release Date: </div>
 				<div>{{item.overview}}</div>
@@ -14,7 +14,8 @@
 
 
 		<div class="add-favorite">
-			<a (click)="done?navigate('favorites'):this.add(item.id)">{{done?"Favorites":"Add to Favorites"}}</a>
+			<a (click)="!ls.checkById(item.id) ? navigate('favorites') : ls.addFav(item.id)">
+				{{!ls.checkById(item.id)  ? "Favorites" : "Add to Favorites"}}</a>
 		</div>
 	</div>
 
@@ -35,5 +36,3 @@
 		</div>
 	</div>
 </section>
-
-
