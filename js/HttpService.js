@@ -100,16 +100,16 @@
     };
 
 
-    HttpService.prototype.getSearch = function () {
+    HttpService.prototype.getSearch = function (key, adult) {
         var t = this;
         var options = new ng.http.Request({
             body: '',
             method: 'get',
             headers: '',
             url: t.path + 'search/movie?' + $.param({'api_key': t.apiKey}) + '&' + $.param({'language': 'en-US'})  + '&'
-            + $.param({'query': "One"})  + '&'
-            + $.param({'page': 1})  + '&'+ $.param({'include_adult': true}) + '&'+ $.param({'region': t.region}) + '&'
-            + $.param({'year':t.year})  + '&' + $.param({'primary_release_year': t.relYear})
+            + $.param({'query': key})  + '&' + $.param({'page': 1})  + '&'+ $.param({'include_adult': adult}) + '&'
+            + $.param({'region': t.region}) + '&' + $.param({'year':t.year})  + '&'
+            + $.param({'primary_release_year': t.relYear})
         });
 
         return this.http.request(options)
