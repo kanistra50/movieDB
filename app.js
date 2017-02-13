@@ -21,11 +21,7 @@
     function App( router ) {
         m.AppComponent.router = router;
         Object.assign(this, router);
-    };
-
-    m.add = function (id) {
-        m.Ls.addFav(id);
-    };
+    }
 
     var AppModule = ng.core.NgModule({
         declarations: [
@@ -41,13 +37,16 @@
         imports: [
             ng.http.HttpModule,
             ng.platformBrowser.BrowserModule,
+            ng.forms.FormsModule,
             ng.forms.ReactiveFormsModule,
             ng.router.RouterModule.forRoot(routes, { useHash: true })
         ],
         providers: [
             m.HttpService,
+            m.LsController,
             { provide: ng.http.RequestOptions, useClass: m.RequestOptions }
         ],
+        //bootstrap: [App, LocalStorage, SessionStorage],
         bootstrap: [App]
     })
         .Class({
