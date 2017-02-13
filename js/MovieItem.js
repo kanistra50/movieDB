@@ -4,29 +4,25 @@
 
 
     m.MovieItem = ng.core.Component({
-        //selector: 'm-item',
         templateUrl: 'html/MovieItem.html'
-        // host: {
-        //     class: 'm-item'
-        // }
-
     })
         .Class({
             constructor: [
+                m.LsController,
                 m.HttpService,
                 ng.router.ActivatedRoute,
                 MovieItem
             ]
         });
 
-    function MovieItem( http, route) {
+    function MovieItem(ls, http, route) {
         var t = this,
             id = route.params.getValue().id;
 
         Object.assign(this, {
             http: http,
-            //done: m.done,
-            add: function (id) {m.add(id)},
+            ls: ls,
+            //add: function (id) {m.add(id)},
             id: id,
             item: { id : 'id', title : 'title', popularity: 'popularity',  overview : 'overview',
                 backdrop_path : 'backdrop_path'}
@@ -36,7 +32,7 @@
             t.id = parseInt(p.id);
             t.loadItem(p.id);
         });
-    };
+    }
 
 
     MovieItem.prototype.loadItem = function (id) {
@@ -50,7 +46,6 @@
         this.http.getRecommendation(id)
             .then(function (list) {
                 t.recomMovies = list.results;
-                //console.log(t.movies);
             })
             .catch(function (err) { console.log(err)})
     };
