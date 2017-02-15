@@ -12,7 +12,6 @@
                 m.LsController,
                 m.HttpService,
                 MovieList
-
             ]
         });
 
@@ -24,12 +23,28 @@
             movies: [],
             genres: [],
             ar: [],
-            page_id: 1,
-            active: ""
+            page_id: 0
         })
     }
 
-    MovieList.prototype.loadList = function (page_id) {
+
+    MovieList.prototype.getClass = function (arg) {
+
+       if (arg == this.page_id) {
+           return "page-link active"
+       } else {
+           return "page-link"
+       }
+    };
+
+
+   MovieList.prototype.page_control = function (p) {
+        this.page_id = p;
+        this.loadList();
+   };
+
+    MovieList.prototype.loadList = function () {
+
         var t = this;
         this.http.getMovies(1)
             .then(function (list) {
@@ -38,8 +53,7 @@
                     n;
 
                 if(len >4) {
-                    var nId=0,
-                        left = len%4;
+                    var left = len%4;
                     n = parseInt(len/4);
 
                     for (var ind = 0; ind<n; ind++) {
@@ -47,16 +61,13 @@
                     }
 
                     if (left != 0 ) {
-                        el.movies[el.movies.length + 1] = list.results.slice(len - left, len );
+                        t.ar[t.ar.length] = list.results.slice(len - left, len );
                     }
 
-                    if( page_id == nId ) {
-                        t.active = "active";
-                    }
+                    t.movies = t.ar[t.page_id];
 
-                    t.movies = t.ar[nId];
+                } else {t.ar = list.results}
 
-                }
             })
             .catch(function (err) { console.log(err)});
 
