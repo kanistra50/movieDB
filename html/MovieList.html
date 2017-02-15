@@ -32,7 +32,7 @@
                             <nav aria-label="page_nav">
                                 <ul class="pagination">
                                     <li class="page-item"  *ngFor="let page of ar">
-                                        <a class="page-link" href="#">
+                                        <a [ngClass]="getClass(ar.indexOf(page))" (click)="page_control(ar.indexOf(page))">
                                             {{ar.indexOf(page)+1}}
                                         </a>
                                     </li>
