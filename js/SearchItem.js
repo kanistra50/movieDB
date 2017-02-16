@@ -27,10 +27,26 @@
             foundMovies: [],
             ar: [],
             page_id: 0,
-            active: ""
+            keypass: true
         })
 
     }
+
+    Search.prototype.getClass = function (arg) {
+
+        if (arg == this.page_id) {
+            return "page-link active"
+        } else {
+            return "page-link"
+        }
+    };
+
+    Search.prototype.page_control = function (p) {
+        this.page_id = p;
+        this.keypass = false;
+        this.startSearch();
+
+    };
 
     Search.prototype.startSearch = function () {
         var t = this;
@@ -39,30 +55,25 @@
 
                 var len = list.results.length,
                     n;
-
                 if(len >3) {
-                    var nId=0,
-                        left = len%3;
+                    var left = len%3;
                     n = parseInt(len/3);
 
                     for (var ind = 0; ind<n; ind++) {
                         t.ar[ind]=list.results.slice(3*ind, 3*ind + 3);
                     }
 
-                    if (left != 0 ) {
+                    if (left != 0 && t.keypass ) {
                         t.ar[t.ar.length] = list.results.slice(len - left, len );
                     }
 
-                    // if( page_id == nId ) {
-                    //     t.active = "active";
-                    // }
-
-                    t.foundMovies = t.ar[nId];
+                    t.foundMovies = t.ar[t.page_id];
                 } else {
                     t.ar= [];
                     t.foundMovies = list.results;
 
                 }
+
             })
             .catch(function (err) { console.log(err)});
     };
