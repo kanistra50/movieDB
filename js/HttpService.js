@@ -14,8 +14,8 @@
     function HttpService(http) {
         Object.assign(this, {
             http: http,
-            apiKey: '765f781fe022171c1d2e8ee9ae71bbb2',
-                path : 'https://api.themoviedb.org/3/'
+            apiKey: 'myApiKeyString',
+                path : 'https://api....'
         })
     }
 
